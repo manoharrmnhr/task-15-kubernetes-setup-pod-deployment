@@ -382,34 +382,27 @@ minikube delete
 
 ---
 
-## Interview Questions & Answers
-
-**Q: What is a Kubernetes Pod?**
-A Pod is the smallest deployable unit in Kubernetes. It wraps one or more containers that share the same network namespace (IP address) and storage volumes. Containers inside a Pod can communicate via `localhost`.
-
-**Q: Why do we use `kubectl apply` instead of `create`?**
-`kubectl apply` is declarative — it creates the resource if it doesn't exist and updates it if it does (idempotent). `kubectl create` is imperative and fails if the resource already exists. `apply` is preferred in CI/CD and GitOps workflows.
-
-**Q: What happens when a Pod dies?**
-A standalone Pod (not managed by a Deployment/ReplicaSet) is NOT automatically restarted. It stays in a `Failed`/`Error` state. That's why in production, you use Deployments which have a ReplicaSet controller that ensures the desired number of pods are always running.
-
-**Q: What is the role of labels?**
-Labels are key-value metadata attached to Kubernetes objects. They are used by Services and Selectors to find and group pods, by ReplicaSets to manage pods, for filtering with `kubectl get pods -l app=nginx`, and for organizing resources across environments.
-
-**Q: How do you debug a Pod in Pending state?**
-1. Run `kubectl describe pod <pod-name>` and check the **Events** section.
-2. Common causes: insufficient CPU/memory resources, no schedulable node, PVC not bound, image pull errors.
-3. Run `kubectl get events --sort-by='.lastTimestamp'` for cluster-wide events.
-4. Check node status: `kubectl get nodes` — if node is `NotReady`, that's the issue.
-
----
 
 ## Project Structure
 
 ```
-task-15-kubernetes/
-├── pod.yml          # Nginx Pod definition
-└── README.md        # This guide
+task-15-kubernetes-setup-pod-deployment
+├── pod.yml
+├── README.md
+└── screenshots
+    ├── Delete and recreate the Pod to observe.png
+    ├── Exec into the Pod using kubectl exec -it.png
+    ├── kubectl apply -f pod.yml and confirm that the Pod is created.png
+    ├── kubectl get pods -o wide and kubectl describe pod.png
+    ├── kubectl get pods -o wide and use kubectl describe pod.png
+    ├── live nginx .png
+    ├── minikube kubectl installation and verification.png
+    ├── pod creation.png
+    ├── Screenshot From 2026-02-15 15-36-44.png
+    ├── Screenshot From 2026-02-15 15-37-42.png
+    ├── Screenshot From 2026-02-15 15-46-48.png
+    ├── Screenshot From 2026-02-15 15-47-07.png
+    └── verify nginx files and\012connectivity internally.png
 ```
 
 ---
